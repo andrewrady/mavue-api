@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 5 api application for testing web applications for Martial Arts Studios.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version - 2.4.2
 
-* System dependencies
+* Configuration - tba
 
-* Configuration
+* Database creation - currently runing sqlite for local, planning to use postgrese for qa, production
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Deployment instructions - tba
