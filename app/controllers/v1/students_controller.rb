@@ -2,12 +2,12 @@ class V1::StudentsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @student = Student.all
+    @student = Student.all().where(:user_id => current_user)
     render json: @student
   end
 
   def show
-    @student = Student.where(:id => params[:id])
+    @student = Student.where(:user_id => current_user).where(:id => params[:id])
 
     render json: @student
   end
