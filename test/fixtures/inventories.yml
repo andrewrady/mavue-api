@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item_number: 1
+  name: MyString
+  price: 1.5
+  tax: false
+
+two:
+  item_number: 1
+  name: MyString
+  price: 1.5
+  tax: false
