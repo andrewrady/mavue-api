@@ -14,11 +14,12 @@ class V1::StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
+    @student.user_id = current_user.id
 
     if @student.save
       render json: @student, status: 201
     else
-      render json: { errors: error.message }, status: 422
+      render json: { errors: errors.message }, status: 422
     end
   end
 
@@ -41,6 +42,6 @@ class V1::StudentsController < ApplicationController
 
   private
     def student_params
-      params.permit(:first_name, :last_name, :address, :city, :state, :zip, :rank, :ata_number)
+      params.permit(:first_name, :last_name, :address, :city, :state, :zip, :rank, :ata_number, :user_id)
     end
 end
