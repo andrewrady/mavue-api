@@ -11,4 +11,5 @@ class User < ApplicationRecord
   end
 
   has_many :student
+  has_many :inventory
 end
