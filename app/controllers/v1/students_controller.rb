@@ -8,8 +8,7 @@ class V1::StudentsController < ApplicationController
 
   def show
     @student = Student.where(:user_id => current_user).where(:id => params[:id])
-
-    render json: @student
+    render json: @student, include: 'sales'
   end
 
   def create

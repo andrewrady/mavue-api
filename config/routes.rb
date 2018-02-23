@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :user_token
 
   namespace :v1 do
-    resources :students
+    resources :students do
+      resources :sales
+    end
     resources :inventory
   end
 end
