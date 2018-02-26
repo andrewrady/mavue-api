@@ -39,6 +39,18 @@ class V1::StudentsController < ApplicationController
     head 204
   end
 
+  def search
+    # @results = Student.where(:first_name => params[:name]).first
+    name = params[:name] || nil
+    @results = []
+    @results = Student.where(:user_id => current_user)
+                      .where('first_name LIKE ?'\
+                     'OR last_name LIKE ?', "%#{name}%", "%#{name}%") 
+    if name
+      render json: @results
+    end
+  end
+
   private
     def student_params
       params.permit(:first_name, :last_name, :address, :city, :state, :zip, :rank, :ata_number, :user_id)

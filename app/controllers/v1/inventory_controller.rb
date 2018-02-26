@@ -13,6 +13,7 @@ class V1::InventoryController < ApplicationController
 
   def create
     @inventory = Inventory.new(inventory_params)
+    @inventory.user_id = current_user.id
 
     if @inventory.save
       render json: @inventory, status: 201
