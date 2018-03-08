@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       resources :sales
     end
     # get 'students/search/:name' => 'student_controller#search'
-    resources :inventory
+    resources :inventory do
+      get 'search', on: :collection
+    end
   end
 end

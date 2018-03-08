@@ -40,13 +40,12 @@ class V1::StudentsController < ApplicationController
   end
 
   def search
-    # @results = Student.where(:first_name => params[:name]).first
-    name = params[:name] || nil
+    name = params[:name]
     @results = []
     @results = Student.where(:user_id => current_user)
                       .where('first_name LIKE ?'\
                      'OR last_name LIKE ?', "%#{name}%", "%#{name}%") 
-    if name
+    if name.present?
       render json: @results
     end
   end

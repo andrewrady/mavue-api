@@ -39,6 +39,17 @@ class V1::InventoryController < ApplicationController
     head 204
   end
 
+  def search
+    item = params[:item]
+    @results = []
+    @results = Inventory.where(:user_id => current_user)
+                .where('name LIKE ?'\
+                    'OR item_number LIKE ?', "%#{item}%", "%#{item}%")
+    if item.present?
+      render json: @results
+    end
+  end
+
   private
     def inventory_params
       params.permit(:item_number, :name, :price, :tax, :user_id)

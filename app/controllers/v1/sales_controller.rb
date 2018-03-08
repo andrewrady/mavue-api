@@ -45,7 +45,7 @@ class V1::SalesController < ApplicationController
 
   private
     def sale_params
-      params.permit(:student_id, :total, :items => [:item_number, :item_price, :price])
+      params.permit(:student_id, :total, :items => [:item_number, :item_name, :price])
     end
 
 
