@@ -13,6 +13,7 @@ class V1::InventoryController < ApplicationController
 
   def create
     @inventory = Inventory.new(inventory_params)
+    @inventory.user_id = current_user.id
 
     if @inventory.save
       render json: @inventory, status: 201
@@ -36,6 +37,17 @@ class V1::InventoryController < ApplicationController
     @inventory.destroy
 
     head 204
+  end
+
+  def search
+    item = params[:item]
+    @results = []
+    @results = Inventory.where(:user_id => current_user)
+                .where('name LIKE ?'\
+                    'OR item_number LIKE ?', "%#{item}%", "%#{item}%")
+    if item.present?
+      render json: @results
+    end
   end
 
   private
