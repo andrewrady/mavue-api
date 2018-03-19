@@ -14,5 +14,8 @@ Rails.application.routes.draw do
     resources :inventory do
       get 'search', on: :collection
     end
+    namespace :settings do
+      resources :ranks
+    end
   end
 end
