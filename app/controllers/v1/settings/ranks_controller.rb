@@ -8,6 +8,7 @@ class V1::Settings::RanksController < ApplicationController
 
   def create
     @rank = Rank.new(rank_params)
+    @rank.user_id = current_user.id
 
     if @rank.save
       render json: @rank, status: 201
