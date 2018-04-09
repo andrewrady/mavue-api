@@ -3,17 +3,16 @@ class V1::TestingController < ApplicationController
   def index
     @testing = Testing.all
 
-    render json: @testing, :include => [:testing_student, :testing_instuctor]
+    render json: @testing, :include => [:testing_student, :testing_instructor]
   end
 
   def show
     @testing = Testing.where(:id => params[:id])
-    render json: @testing, :include => [:testing_student, :testing_instuctor]
+    render json: @testing, :include => [:testing_student, :testing_instructor]
   end
 
   def create
     @testing = Testing.new(testing_params)
-    # @testing.testing_student.build(student_params)
 
     if @testing.save
       render json: @testing, status: 201
