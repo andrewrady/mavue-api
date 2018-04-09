@@ -10,11 +10,14 @@ Rails.application.routes.draw do
       get 'search', on: :collection
       resources :sales
       resources :notes
+      resources :testing, :controller => "student_testing", only: [:index, :show, :post] 
     end
 
     resources :inventory do
       get 'search', on: :collection
     end
+
+    resources :testing
     
     namespace :settings do
       resources :ranks

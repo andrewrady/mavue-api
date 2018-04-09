@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180401191507) do
+ActiveRecord::Schema.define(version: 20180408173155) do
 
   create_table "inventories", force: :cascade do |t|
     t.integer "item_number"
@@ -70,6 +70,40 @@ ActiveRecord::Schema.define(version: 20180401191507) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_students_on_user_id"
+  end
+
+  create_table "testing_instuctors", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "rank"
+    t.integer "testing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["testing_id"], name: "index_testing_instuctors_on_testing_id"
+  end
+
+  create_table "testing_students", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "testing_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "total"
+    t.integer "form"
+    t.integer "sparring"
+    t.integer "weapon"
+    t.integer "board"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_testing_students_on_student_id"
+    t.index ["testing_id"], name: "index_testing_students_on_testing_id"
+  end
+
+  create_table "testings", force: :cascade do |t|
+    t.boolean "complete"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_testings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
