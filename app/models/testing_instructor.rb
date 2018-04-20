@@ -1,3 +1,3 @@
-class TestingInstuctor < ApplicationRecord
-  belongs_to :testing
+class TestingInstructor < ApplicationRecord
+  belongs_to :testing, optional: true
 end

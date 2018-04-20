@@ -15,7 +15,7 @@ class V1::TestingController < ApplicationController
     @testing = Testing.new(testing_params)
 
     if @testing.save
-      render json: @testing, status: 201
+      render json: @testing, :include => [:testing_student, :testing_instructor], status: 201
     else
       render json: @testing.errors, status: 422
     end
@@ -25,20 +25,22 @@ class V1::TestingController < ApplicationController
     @testing = Testing.where(:id => params[:id])
 
     if @testing.update
-      render json: @testing, status: 201
+      render json: @testing, :include => [:testing_student, :testing_instructor], status: 201
     else
       render json: { errors: errors.message }, status: 422
     end
   end
 
   def destroy
-    @testing = Testing.where(:id => params[:id])
+    @testing = Testing.where(:id => params[:id]).first
     @testing.destroy
     head 204
   end
 
   private
     def testing_params
-      params.permit(:complete, :user_id, testing_student_attributes: [:student_id, :testing_id, :first_name, :last_name, :total, :form, :weapon, :sparring, :board])
+      params.permit(:complete, :user_id, 
+        testing_student_attributes: [:student_id, :testing_id, :first_name, :last_name, :total, :form, :weapon, :sparring, :board],
+        testing_instructor_attributes: [:first_name, :last_name, :rank, :testing_id])
     end
 end
