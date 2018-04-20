@@ -1,13 +1,14 @@
 class V1::TestingController < ApplicationController
-  
+  before_action :authenticate_user
+
   def index
-    @testing = Testing.all
+    @testing = Testing.all.where(:user_id => current_user)
 
     render json: @testing, :include => [:testing_student, :testing_instructor]
   end
 
   def show
-    @testing = Testing.where(:id => params[:id])
+    @testing = Testing.where(:user_id => current_user).where(:id => params[:id])
     render json: @testing, :include => [:testing_student, :testing_instructor]
   end
 
