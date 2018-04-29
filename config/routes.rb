@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       get 'search', on: :collection
       resources :sales
       resources :notes
-      resources :testing, :controller => "student_testing", only: [:index, :show, :create] 
+      resources :testing, :controller => "student_testing", only: [:index, :show] 
     end
 
     resources :inventory do

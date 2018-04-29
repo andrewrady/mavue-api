@@ -14,6 +14,7 @@ class V1::TestingController < ApplicationController
 
   def create
     @testing = Testing.new(testing_params)
+    @testing.user_id = current_user.id
 
     if @testing.save
       render json: @testing, :include => [:testing_student, :testing_instructor], status: 201
@@ -24,8 +25,9 @@ class V1::TestingController < ApplicationController
 
   def update
     @testing = Testing.where(:id => params[:id])
+    # @testing.user_id = current_user.id
 
-    if @testing.update
+    if @testing.update(testing_params)
       render json: @testing, :include => [:testing_student, :testing_instructor], status: 201
     else
       render json: { errors: errors.message }, status: 422
@@ -41,7 +43,7 @@ class V1::TestingController < ApplicationController
   private
     def testing_params
       params.permit(:complete, :user_id, 
-        testing_student_attributes: [:student_id, :testing_id, :first_name, :last_name, :total, :form, :weapon, :sparring, :board],
+        testing_student_attributes: [:student_id, :testing_id, :first_name, :last_name, :total, :form, :weapon, :sparring, :board, :rank],
         testing_instructor_attributes: [:first_name, :last_name, :rank, :testing_id])
     end
 end
