@@ -43,7 +43,7 @@ class V1::TestingController < ApplicationController
   private
     def testing_params
       params.permit(:complete, :user_id, 
-        testing_student_attributes: [:student_id, :testing_id, :first_name, :last_name, :total, :form, :weapon, :sparring, :board, :rank],
+        testing_student_attributes: [:student_id, :testing_id, :first_name, :last_name, :total, :form, :weapon, :sparring, :board, :rank, :size],
         testing_instructor_attributes: [:first_name, :last_name, :rank, :testing_id])
     end
 end
