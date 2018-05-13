@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :v1 do
     resources :students do
       get 'search', on: :collection
+      get 'instructor/search', on: :collection
       resources :sales
       resources :notes
       resources :testing, :controller => "student_testing", only: [:index, :show] 
