@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220030830) do
+ActiveRecord::Schema.define(version: 20180512154629) do
 
   create_table "inventories", force: :cascade do |t|
     t.integer "item_number"
@@ -23,6 +23,23 @@ ActiveRecord::Schema.define(version: 20180220030830) do
     t.index ["user_id"], name: "index_inventories_on_user_id"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.string "description"
+    t.integer "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_notes_on_student_id"
+  end
+
+  create_table "ranks", force: :cascade do |t|
+    t.string "name"
+    t.integer "order"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_ranks_on_user_id"
+  end
+
   create_table "sales", force: :cascade do |t|
     t.text "items"
     t.float "total"
@@ -30,6 +47,14 @@ ActiveRecord::Schema.define(version: 20180220030830) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["student_id"], name: "index_sales_on_student_id"
+  end
+
+  create_table "sales_taxes", force: :cascade do |t|
+    t.integer "percent"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sales_taxes_on_user_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -44,7 +69,45 @@ ActiveRecord::Schema.define(version: 20180220030830) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "size"
+    t.boolean "Instructor"
     t.index ["user_id"], name: "index_students_on_user_id"
+  end
+
+  create_table "testing_instructors", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "rank"
+    t.integer "testing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["testing_id"], name: "index_testing_instructors_on_testing_id"
+  end
+
+  create_table "testing_students", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "testing_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "total"
+    t.integer "form"
+    t.integer "sparring"
+    t.integer "weapon"
+    t.integer "board"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "rank"
+    t.string "size"
+    t.index ["student_id"], name: "index_testing_students_on_student_id"
+    t.index ["testing_id"], name: "index_testing_students_on_testing_id"
+  end
+
+  create_table "testings", force: :cascade do |t|
+    t.boolean "complete"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_testings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
