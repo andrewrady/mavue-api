@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180512154629) do
+ActiveRecord::Schema.define(version: 20180614030531) do
 
   create_table "inventories", force: :cascade do |t|
     t.integer "item_number"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20180512154629) do
     t.integer "user_id"
     t.string "size"
     t.boolean "Instructor"
+    t.string "phoneNumber"
     t.index ["user_id"], name: "index_students_on_user_id"
   end
 
