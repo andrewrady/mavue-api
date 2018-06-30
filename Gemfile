@@ -25,6 +25,7 @@ gem 'puma', '~> 3.7'
 gem 'rack-cors'
 gem 'knock'
 gem 'devise'
+gem 'stripe', '~> 3.17'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180614030531) do
+ActiveRecord::Schema.define(version: 20180630062205) do
 
   create_table "inventories", force: :cascade do |t|
     t.integer "item_number"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20180614030531) do
     t.integer "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token"
     t.index ["student_id"], name: "index_sales_on_student_id"
   end
 
