@@ -52,7 +52,7 @@ class V1::InventoryController < ApplicationController
 
   private
     def inventory_params
-      params.permit(:item_number, :name, :price, :tax, :user_id)
+      params.permit(:item_number, :name, :price, :tax, :user_id, :tuition)
     end
 
 end

@@ -18,6 +18,10 @@ Rails.application.routes.draw do
       get 'search', on: :collection
     end
 
+    resources :products do
+      resources :subscriptions
+    end
+
     resources :testing
     
     namespace :settings do
