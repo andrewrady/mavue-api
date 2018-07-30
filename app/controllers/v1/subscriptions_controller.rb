@@ -10,18 +10,16 @@ class V1::SubscriptionsController < ApplicationController
     @subscription.product_id =  params[:product_id]
 
     @product = Product.find(params[:product_id])
+    plan = Stripe::Plan.create({
+      currency: 'usd',
+      interval: params[:interval],
+      product: @product.stripe_id,
+      nickname: params[:name],
+      amount: (params[:price] * 100).to_i,
+    })
 
     if @subscription.save
-      plan = Stripe::Plan.create({
-        currency: 'usd',
-        interval: params[:interval],
-        #Need to get plan id back from Strips API store it in the db and reference it below
-        product: 'prod_DJklgK8z4C5LN9',
-        nickname: 'Pro Plan',
-        amount: (params[:price] * 100).to_i,
-      })
-      
-      render json: @subscription, :status 201
+      render json: @subscription, status: 201
     else
       render json: { errors: errors.message }, status: 422
     end

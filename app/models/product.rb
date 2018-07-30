@@ -1,4 +1,4 @@
 class Product < ApplicationRecord
   belongs_to :user
-  has_many :subscription
+  has_many :subscription, :dependent => :destroy
 end
