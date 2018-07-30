@@ -24,15 +24,8 @@ class V1::ProductsController < ApplicationController
   end
 
   def show
-
-  end
-
-  def update
-
-  end
-
-  def destroy
-
+    @product = Product.where(:user_id => current_user).where(:id => params[:id])
+    render json: @product, include: 'subscription', status: 201
   end
 
   private

@@ -2,7 +2,8 @@ class V1::SubscriptionsController < ApplicationController
   before_action :authenticate_user
 
   def index
-
+    @subscription = Subscription.all().where(:product_id => params[:product_id])
+    render json: @subscription
   end
 
   def create 
@@ -23,6 +24,11 @@ class V1::SubscriptionsController < ApplicationController
     else
       render json: { errors: errors.message }, status: 422
     end
+  end
+
+  def show 
+    @subscription = Subscription.where(:product_id => params[:product_id]).where(:id => params[:id]).first
+    render json: @subscription, status: 201
   end
 
   private
