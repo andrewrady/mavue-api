@@ -27,8 +27,7 @@ class V1::SalesController < ApplicationController
 
   def update
     @sale = Sale.where(:student_id => params[:student_id], :id => params[:id])
-    
-    # render json: @sale
+
     if @sale.update(sale_params)
       render json: @sale, status: 201
     else
