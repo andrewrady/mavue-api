@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     
     namespace :settings do
       resources :ranks
+      resources :programs
       resources :salestaxes
     end
   end
