@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180826165531) do
+ActiveRecord::Schema.define(version: 20180904024742) do
+
+  create_table "head_of_houses", force: :cascade do |t|
+    t.string "firstName"
+    t.string "lastName"
+    t.string "state"
+    t.string "address"
+    t.integer "zip"
+    t.string "email"
+    t.string "phoneNumber"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_head_of_houses_on_user_id"
+  end
 
   create_table "inventories", force: :cascade do |t|
     t.integer "item_number"
@@ -49,6 +63,8 @@ ActiveRecord::Schema.define(version: 20180826165531) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.float "price"
+    t.float "downPayment"
     t.index ["user_id"], name: "index_programs_on_user_id"
   end
 

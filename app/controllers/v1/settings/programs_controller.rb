@@ -17,16 +17,15 @@ class V1::Settings::ProgramsController < ApplicationController
     end
   end
 
-  def update
-
-  end
-
   def destroy
+    @program = Program.where(:user_id => current_user).where(:id => params[:id]).first
+    @program.destroy
 
+    head 204
   end
 
   private 
     def program_params
-      params.permit(:title, :start, :end, :duration)
+      params.permit(:title, :start, :end, :duration, :price, :downPayment)
     end
 end
