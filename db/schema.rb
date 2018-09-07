@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180904024742) do
+ActiveRecord::Schema.define(version: 20180904040109) do
+
+  create_table "contracts", force: :cascade do |t|
+    t.date "startDate"
+    t.date "endDate"
+    t.integer "lastFour"
+    t.float "amount"
+    t.integer "head_of_houses_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["head_of_houses_id"], name: "index_contracts_on_head_of_houses_id"
+  end
 
   create_table "head_of_houses", force: :cascade do |t|
     t.string "firstName"
@@ -116,6 +127,8 @@ ActiveRecord::Schema.define(version: 20180904024742) do
     t.string "size"
     t.boolean "Instructor"
     t.string "phoneNumber"
+    t.integer "head_of_house_id"
+    t.index ["head_of_house_id"], name: "index_students_on_head_of_house_id"
     t.index ["user_id"], name: "index_students_on_user_id"
   end
 

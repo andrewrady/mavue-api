@@ -14,6 +14,10 @@ Rails.application.routes.draw do
       resources :testing, :controller => "student_testing", only: [:index, :show] 
     end
 
+    resources :head_of_houses do
+      get 'search', on: :collection
+    end
+
     resources :inventory do
       get 'search', on: :collection
     end
