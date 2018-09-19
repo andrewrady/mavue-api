@@ -16,9 +16,7 @@ Rails.application.routes.draw do
 
     resources :head_of_houses do
       get 'search', on: :collection
-      scope module: :head_of_houses do
-        resources :contracts
-      end
+      resources :contracts
     end
 
     resources :inventory do

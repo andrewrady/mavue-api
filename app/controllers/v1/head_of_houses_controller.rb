@@ -1,8 +1,5 @@
 class V1::HeadOfHousesController < ApplicationController
   before_action :authenticate_user
-  ##todo list
-  ## create contract controller that is child of this one
-  ## contract controller needs to save the data needed to send eliot the data for recurring payments  
 
   def index
     @hoh = HeadOfHouse.all.where(:user_id => current_user)
@@ -22,7 +19,7 @@ class V1::HeadOfHousesController < ApplicationController
     if @hoh.save
       render json: @hoh, status: 201
     else
-      render json: { errors: errors.messages }, status: 422
+      render json: @hoh.errors, status: 422
     end
   end
 
@@ -32,7 +29,7 @@ class V1::HeadOfHousesController < ApplicationController
     if @hoh.update(hoh_params)
       render json: @hoh, status: 201
     else
-      render json: { errors: errors.messages }, status: 422
+      render json: @hoh.errors, status: 422
     end      
   end
 

@@ -1,4 +1,4 @@
-class V1::HeadOfHouses::ContractsController < ApplicationController
+class V1::ContractsController < ApplicationController
   before_action :authenticate_user
 
   def index
@@ -7,7 +7,7 @@ class V1::HeadOfHouses::ContractsController < ApplicationController
   end
 
   def show
-    @contract = Contract.where(:head_of_house_id => params[:head_of_house_id]).where(:id => params[id])
+    @contract = Contract.where(:head_of_house_id => params[:head_of_house_id]).where(:id => params[:id])
     render json: @contract
   end
 
@@ -15,7 +15,6 @@ class V1::HeadOfHouses::ContractsController < ApplicationController
     @contract = Contract.new(contracts_params)
     @contract.head_of_house_id = params[:head_of_house_id]
 
-    # render json: @contract
     if @contract.save
       render json: @contract, status: 201
     else
@@ -29,7 +28,7 @@ class V1::HeadOfHouses::ContractsController < ApplicationController
     if @contract.update(contracts_params)
       render json: @contract, status: 201
     else
-      render json: { errors: errors.messages }, status: 422
+      render json: @contract.errors, status: 422
     end
   end
 
