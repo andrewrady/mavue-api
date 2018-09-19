@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
     resources :head_of_houses do
       get 'search', on: :collection
+      scope module: :head_of_houses do
+        resources :contracts
+      end
     end
 
     resources :inventory do
@@ -23,7 +26,7 @@ Rails.application.routes.draw do
     end
 
     resources :products do
-      resources :subscriptions
+      # resources :subscriptions
     end
 
     resources :testing

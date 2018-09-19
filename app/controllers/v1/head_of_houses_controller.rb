@@ -11,13 +11,14 @@ class V1::HeadOfHousesController < ApplicationController
 
   def show
     @hoh = HeadOfHouse.where(:user_id => current_user).where(:id => params[:id])
-    render json: @hoh
+    render json: @hoh, :include => [:contracts]
   end
 
   def create
     @hoh = HeadOfHouse.new(hoh_params)
     @hoh.user_id = current_user.id
 
+    # render json: @hoh
     if @hoh.save
       render json: @hoh, status: 201
     else
