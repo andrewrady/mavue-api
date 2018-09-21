@@ -10,7 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180630062205) do
+ActiveRecord::Schema.define(version: 20180907061512) do
+
+  create_table "contracts", force: :cascade do |t|
+    t.date "startDate"
+    t.date "endDate"
+    t.integer "lastFour"
+    t.float "amount"
+    t.integer "head_of_house_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["head_of_house_id"], name: "index_contracts_on_head_of_house_id"
+  end
+
+  create_table "head_of_houses", force: :cascade do |t|
+    t.string "firstName"
+    t.string "lastName"
+    t.string "state"
+    t.string "address"
+    t.integer "zip"
+    t.string "email"
+    t.string "phoneNumber"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_head_of_houses_on_user_id"
+  end
 
   create_table "inventories", force: :cascade do |t|
     t.integer "item_number"
@@ -20,6 +45,7 @@ ActiveRecord::Schema.define(version: 20180630062205) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.boolean "tuition"
     t.index ["user_id"], name: "index_inventories_on_user_id"
   end
 
@@ -29,6 +55,28 @@ ActiveRecord::Schema.define(version: 20180630062205) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["student_id"], name: "index_notes_on_student_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "stripe_id"
+    t.index ["user_id"], name: "index_products_on_user_id"
+  end
+
+  create_table "programs", force: :cascade do |t|
+    t.string "title"
+    t.datetime "start"
+    t.datetime "end"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.float "price"
+    t.float "downPayment"
+    t.index ["user_id"], name: "index_programs_on_user_id"
   end
 
   create_table "ranks", force: :cascade do |t|
@@ -47,6 +95,12 @@ ActiveRecord::Schema.define(version: 20180630062205) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "token"
+    t.string "maskedPan"
+    t.string "cardType"
+    t.string "lastFour"
+    t.string "referenceNumber"
+    t.string "authCode"
+    t.string "authResponse"
     t.index ["student_id"], name: "index_sales_on_student_id"
   end
 
@@ -73,7 +127,19 @@ ActiveRecord::Schema.define(version: 20180630062205) do
     t.string "size"
     t.boolean "Instructor"
     t.string "phoneNumber"
+    t.integer "head_of_house_id"
+    t.index ["head_of_house_id"], name: "index_students_on_head_of_house_id"
     t.index ["user_id"], name: "index_students_on_user_id"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string "name"
+    t.float "price"
+    t.string "interval"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_subscriptions_on_product_id"
   end
 
   create_table "testing_instructors", force: :cascade do |t|

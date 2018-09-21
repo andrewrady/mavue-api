@@ -11,6 +11,8 @@ class User < ApplicationRecord
   end
 
   has_many :student
+  has_many :head_of_house
   has_many :inventory
   has_many :testing
+  has_many :product
 end

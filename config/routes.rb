@@ -14,14 +14,24 @@ Rails.application.routes.draw do
       resources :testing, :controller => "student_testing", only: [:index, :show] 
     end
 
+    resources :head_of_houses do
+      get 'search', on: :collection
+      resources :contracts
+    end
+
     resources :inventory do
       get 'search', on: :collection
+    end
+
+    resources :products do
+      # resources :subscriptions
     end
 
     resources :testing
     
     namespace :settings do
       resources :ranks
+      resources :programs
       resources :salestaxes
     end
   end

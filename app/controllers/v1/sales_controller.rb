@@ -17,20 +17,6 @@ class V1::SalesController < ApplicationController
 
   def create
     @sale = Sale.new(sale_params)
-		
-		@email = "andrew.arsoftware@gmail.com"
-    @amount = params[:total]
-    customer = Stripe::Customer.create(
-			:email => @email,
-			:source => params[:token]
-		)
-
-		charge = Stripe::Charge.create(
-			:customer			=> customer.id,
-			:amount				=> @amount,
-			:description	=> "rails stripe test",
-			:currency			=> "usd"
-		)
 
     if @sale.save
       render json: @sale, status: 201
@@ -41,8 +27,7 @@ class V1::SalesController < ApplicationController
 
   def update
     @sale = Sale.where(:student_id => params[:student_id], :id => params[:id])
-    
-    # render json: @sale
+
     if @sale.update(sale_params)
       render json: @sale, status: 201
     else
@@ -59,7 +44,9 @@ class V1::SalesController < ApplicationController
 
   private
     def sale_params
-      params.permit(:student_id, :total, :token, :items => [:item_number, :item_name, :price])
+      params.permit(
+        :student_id, :authReponse, :authCode, :referenceNumer, 
+        :maskedPan, :cardType, :lastFour, :total, :token, :items => [:item_number, :item_name, :price])
     end
 
 
