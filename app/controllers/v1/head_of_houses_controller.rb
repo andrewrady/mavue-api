@@ -48,6 +48,8 @@ class V1::HeadOfHousesController < ApplicationController
             'OR lastName LIKE ?', "%#{person}%", "%#{person}%")
     if person.present?
       render json: @results
+    else
+      render json: []
     end
   end
 

@@ -41,6 +41,6 @@ class V1::ContractsController < ApplicationController
 
   private 
     def contracts_params
-      params.permit(:startDate, :endDate, :lastFour, :amount)
+      params.permit(:startDate, :endDate, :lastFour, :amount, :downPaymentAmount)
     end
 end

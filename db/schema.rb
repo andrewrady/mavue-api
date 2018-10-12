@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180907061512) do
+ActiveRecord::Schema.define(version: 20181012182831) do
 
   create_table "contracts", force: :cascade do |t|
     t.date "startDate"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20180907061512) do
     t.integer "head_of_house_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "downPaymentAmount"
     t.index ["head_of_house_id"], name: "index_contracts_on_head_of_house_id"
   end
 
@@ -130,16 +131,6 @@ ActiveRecord::Schema.define(version: 20180907061512) do
     t.integer "head_of_house_id"
     t.index ["head_of_house_id"], name: "index_students_on_head_of_house_id"
     t.index ["user_id"], name: "index_students_on_user_id"
-  end
-
-  create_table "subscriptions", force: :cascade do |t|
-    t.string "name"
-    t.float "price"
-    t.string "interval"
-    t.integer "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_subscriptions_on_product_id"
   end
 
   create_table "testing_instructors", force: :cascade do |t|
