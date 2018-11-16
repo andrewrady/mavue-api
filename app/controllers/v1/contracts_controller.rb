@@ -2,7 +2,7 @@ class V1::ContractsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @contracts = Contract.all.where(:head_of_house_id => params[:head_of_houses_id])
+    @contracts = Contract.all.where(:head_of_house_id => params[:head_of_house_id])
     render json: @contracts
   end
 

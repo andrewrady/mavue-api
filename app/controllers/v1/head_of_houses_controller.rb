@@ -25,9 +25,12 @@ class V1::HeadOfHousesController < ApplicationController
 
   def update
     @hoh = HeadOfHouse.where(:user_id => current_user).where(:id => params[:id])
+    @student = Student.where(:id => params[:head_of_house_id])
 
     if @hoh.update(hoh_params)
-      render json: @hoh, status: 201
+      if @student.update(student_params)
+        render json: @hoh, status: 201
+      end
     else
       render json: @hoh.errors, status: 422
     end      
@@ -56,5 +59,9 @@ class V1::HeadOfHousesController < ApplicationController
   private
     def hoh_params
       params.permit(:firstName, :lastName, :state, :address, :zip, :email, :phoneNumber)
+    end
+
+    def student_params()
+      params.permit(:head_of_house_id)
     end
 end
