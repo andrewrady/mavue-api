@@ -15,7 +15,6 @@ class V1::HeadOfHousesController < ApplicationController
     @hoh = HeadOfHouse.new(hoh_params)
     @hoh.user_id = current_user.id
 
-    # render json: @hoh
     if @hoh.save
       render json: @hoh, status: 201
     else
@@ -25,7 +24,7 @@ class V1::HeadOfHousesController < ApplicationController
 
   def update
     @hoh = HeadOfHouse.where(:user_id => current_user).where(:id => params[:id])
-    @student = Student.where(:id => params[:head_of_house_id])
+    @student = Student.where(:id => params[:HoH])
 
     if @hoh.update(hoh_params)
       if @student.update(student_params)
