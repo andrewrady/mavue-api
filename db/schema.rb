@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181012182831) do
+ActiveRecord::Schema.define(version: 20190226014204) do
 
   create_table "contracts", force: :cascade do |t|
     t.date "startDate"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 20181012182831) do
     t.boolean "Instructor"
     t.string "phoneNumber"
     t.integer "head_of_house_id"
+    t.string "email"
     t.index ["head_of_house_id"], name: "index_students_on_head_of_house_id"
     t.index ["user_id"], name: "index_students_on_user_id"
   end
