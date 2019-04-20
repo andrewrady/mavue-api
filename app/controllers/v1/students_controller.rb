@@ -43,8 +43,8 @@ class V1::StudentsController < ApplicationController
     name = params[:name]
     @results = []
     @results = Student.where(:user_id => current_user)
-                      .where('first_name LIKE ?'\
-                     'OR last_name LIKE ?', "%#{name}%", "%#{name}%") 
+                      .where('first_name ILIKE ?'\
+                     'OR last_name ILIKE ?', "%#{name}%", "%#{name}%") 
     if name.present?
       render json: @results
     end
