@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     end
 
     resources :testing
+
+    resources :emails
     
     namespace :settings do
       resources :ranks

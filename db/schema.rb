@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190226014204) do
+ActiveRecord::Schema.define(version: 20190423020237) do
 
   create_table "contracts", force: :cascade do |t|
     t.date "startDate"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20190226014204) do
     t.datetime "updated_at", null: false
     t.integer "downPaymentAmount"
     t.index ["head_of_house_id"], name: "index_contracts_on_head_of_house_id"
+  end
+
+  create_table "emails", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.text "message"
+    t.boolean "read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "head_of_houses", force: :cascade do |t|

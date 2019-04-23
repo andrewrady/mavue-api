@@ -8,6 +8,6 @@ Things you may want to cover:
 
 * Configuration - tba
 
-* Database creation - currently runing sqlite for local, planning to use postgrese for qa, production
+* Database creation - currently running sqlite for local, planning to use postgrese for qa, production
 
 * Deployment instructions - tba
