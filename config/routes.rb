@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     end
 
     resources :testing
+
+    resources :emails do
+      get 'unread', on: :collection
+    end
     
     namespace :settings do
       resources :ranks
