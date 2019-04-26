@@ -29,7 +29,9 @@ Rails.application.routes.draw do
 
     resources :testing
 
-    resources :emails
+    resources :emails do
+      get 'unread', on: :collection
+    end
     
     namespace :settings do
       resources :ranks

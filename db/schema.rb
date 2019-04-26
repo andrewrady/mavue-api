@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190423020237) do
+ActiveRecord::Schema.define(version: 20190426202912) do
 
   create_table "contracts", force: :cascade do |t|
     t.date "startDate"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20190423020237) do
     t.boolean "read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_emails_on_user_id"
   end
 
   create_table "head_of_houses", force: :cascade do |t|
