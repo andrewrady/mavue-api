@@ -17,6 +17,16 @@ class V1::EmailsController < ApplicationController
     end
   end
 
+  def update
+    @email = Email.where(:id => params[:id])
+
+    if @email.update(emails_params)
+      render json: @email, status: 201
+    else
+      render json: @email.errors, status: 422
+    end
+  end
+
   def unread
     @emails = Email.all.where(:user_id => current_user).where(:read => false)
     @total = @emails.count
