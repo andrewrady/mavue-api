@@ -12,12 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20190426202912) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "contracts", force: :cascade do |t|
     t.date "startDate"
     t.date "endDate"
     t.integer "lastFour"
     t.float "amount"
-    t.integer "head_of_house_id"
+    t.bigint "head_of_house_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "downPaymentAmount"
@@ -31,7 +34,7 @@ ActiveRecord::Schema.define(version: 20190426202912) do
     t.boolean "read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_emails_on_user_id"
   end
 
@@ -45,7 +48,7 @@ ActiveRecord::Schema.define(version: 20190426202912) do
     t.string "phoneNumber"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_head_of_houses_on_user_id"
   end
 
@@ -56,14 +59,14 @@ ActiveRecord::Schema.define(version: 20190426202912) do
     t.boolean "tax"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.boolean "tuition"
     t.index ["user_id"], name: "index_inventories_on_user_id"
   end
 
   create_table "notes", force: :cascade do |t|
     t.string "description"
-    t.integer "student_id"
+    t.bigint "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["student_id"], name: "index_notes_on_student_id"
@@ -71,7 +74,7 @@ ActiveRecord::Schema.define(version: 20190426202912) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "stripe_id"
@@ -85,7 +88,7 @@ ActiveRecord::Schema.define(version: 20190426202912) do
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.float "price"
     t.float "downPayment"
     t.index ["user_id"], name: "index_programs_on_user_id"
@@ -94,7 +97,7 @@ ActiveRecord::Schema.define(version: 20190426202912) do
   create_table "ranks", force: :cascade do |t|
     t.string "name"
     t.integer "order"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_ranks_on_user_id"
@@ -103,7 +106,7 @@ ActiveRecord::Schema.define(version: 20190426202912) do
   create_table "sales", force: :cascade do |t|
     t.text "items"
     t.float "total"
-    t.integer "student_id"
+    t.bigint "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "token"
@@ -118,7 +121,7 @@ ActiveRecord::Schema.define(version: 20190426202912) do
 
   create_table "sales_taxes", force: :cascade do |t|
     t.integer "percent"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_sales_taxes_on_user_id"
@@ -133,31 +136,31 @@ ActiveRecord::Schema.define(version: 20190426202912) do
     t.integer "zip"
     t.string "rank"
     t.integer "ata_number"
+    t.bigint "users_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.string "size"
     t.boolean "Instructor"
     t.string "phoneNumber"
-    t.integer "head_of_house_id"
+    t.bigint "head_of_house_id"
     t.string "email"
     t.index ["head_of_house_id"], name: "index_students_on_head_of_house_id"
-    t.index ["user_id"], name: "index_students_on_user_id"
+    t.index ["users_id"], name: "index_students_on_users_id"
   end
 
   create_table "testing_instructors", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "rank"
-    t.integer "testing_id"
+    t.bigint "testing_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["testing_id"], name: "index_testing_instructors_on_testing_id"
   end
 
   create_table "testing_students", force: :cascade do |t|
-    t.integer "student_id"
-    t.integer "testing_id"
+    t.bigint "student_id"
+    t.bigint "testing_id"
     t.string "first_name"
     t.string "last_name"
     t.integer "total"
@@ -175,7 +178,7 @@ ActiveRecord::Schema.define(version: 20190426202912) do
 
   create_table "testings", force: :cascade do |t|
     t.boolean "complete"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_testings_on_user_id"
@@ -200,4 +203,19 @@ ActiveRecord::Schema.define(version: 20190426202912) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "contracts", "head_of_houses"
+  add_foreign_key "emails", "users"
+  add_foreign_key "head_of_houses", "users"
+  add_foreign_key "inventories", "users"
+  add_foreign_key "notes", "students"
+  add_foreign_key "programs", "users"
+  add_foreign_key "ranks", "users"
+  add_foreign_key "sales", "students"
+  add_foreign_key "sales_taxes", "users"
+  add_foreign_key "students", "head_of_houses"
+  add_foreign_key "students", "users", column: "users_id"
+  add_foreign_key "testing_instructors", "testings"
+  add_foreign_key "testing_students", "students"
+  add_foreign_key "testing_students", "testings"
+  add_foreign_key "testings", "users"
 end
